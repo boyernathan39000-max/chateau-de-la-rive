@@ -21,7 +21,7 @@
     burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
     burger.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
     menu.setAttribute('aria-hidden', ouvert ? 'false' : 'true');
-    if (ouvert) { var premier = $('a', menu); if (premier) setTimeout(function () { premier.focus({ preventScroll: true }); }, 320); }
+    if (ouvert) { var premier = $('a.est-courant', menu) || $('a', menu); if (premier) setTimeout(function () { premier.focus({ preventScroll: true }); }, 320); }
   };
   burger.addEventListener('click', function () { basculeMenu(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && corps.classList.contains('menu-ouvert')) { basculeMenu(false); burger.focus(); } });
@@ -131,6 +131,13 @@
     var relance = function () { clearInterval(minuterie); if (!moins) minuterie = setInterval(function () { va(i + 1); }, 9000); };
     points.forEach(function (p, k) { p.addEventListener('click', function () { va(k); relance(); }); });
     va(0); relance();
+  });
+
+  /* Bande défilante des avis : la liste est doublée ici pour que la boucle soit sans coupure ---- */
+  $$('.bande-avis__piste').forEach(function (piste) {
+    if (moins) return;
+    Array.prototype.slice.call(piste.children).forEach(function (li) { var c = li.cloneNode(true); c.setAttribute('aria-hidden', 'true'); piste.appendChild(c); });
+    piste.classList.add('est-anime');
   });
 
   /* Visite du domaine : l'image change selon la position dans la page ----- */

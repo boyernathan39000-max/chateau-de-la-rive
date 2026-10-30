@@ -619,3 +619,29 @@ a.etoiles:hover { filter: brightness(1.25); }
 @media (max-width: 860px) { .rangee-photos { grid-template-columns: 1fr; } }
 
 body { overflow-x: clip; }
+
+/* 12. Retours du 30/10/2026 (suite) -------------------------------------- */
+.menu-plein__ligne > a.est-courant { outline: 1px solid var(--or); outline-offset: 6px; color: var(--or); }
+.menu-plein__ligne > a:focus-visible { outline: 1px solid var(--or); outline-offset: 6px; }
+.menu-ouvert .menu-plein__liste > li:nth-child(7) { transition-delay: .55s; }
+.bande-avis { background: var(--noir); color: #fff; overflow: hidden; padding: 26px 0; }
+.bande-avis__piste { list-style: none; margin: 0; padding: 0; display: flex; gap: 0; width: max-content; }
+.bande-avis__piste.est-anime { animation: defile-avis 70s linear infinite; }
+.bande-avis:hover .bande-avis__piste { animation-play-state: paused; }
+.bande-avis li { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 clamp(28px, 4vw, 64px); border-right: 1px solid rgba(255,255,255,.2); white-space: nowrap; }
+.bande-avis .etoiles { margin: 0; font-size: 12px; letter-spacing: 4px; }
+.bande-avis q { quotes: none; font: 300 clamp(20px, 2.2vw, 30px)/1.3 var(--f-script, var(--f-texte)); font-family: var(--f-script); font-size: clamp(30px, 3vw, 42px); }
+.bande-avis cite { font: 600 11px/1.4 var(--f-texte); letter-spacing: .22em; text-transform: uppercase; font-style: normal; color: #cfc8bb; }
+@keyframes defile-avis { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .bande-avis__piste { flex-wrap: wrap; width: auto; justify-content: center; row-gap: 22px; } }
+.reserver__cartes { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px, 3vw, 44px); max-width: 1000px; margin: 0 auto; }
+.reserver__carte { background: #fff; border: 1px solid rgba(176,141,87,.35); padding: clamp(26px, 3.4vw, 48px); text-align: center; }
+.reserver__carte h3 { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 12px; }
+.reserver__carte p { margin: 0; }
+.fiche-formulaire--centre { max-width: 620px; margin-left: auto; margin-right: auto; text-align: center; }
+.formulaire--centre { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+.formulaire--centre > div { width: 100%; }
+.formulaire--centre input[type="email"] { text-align: center; }
+.formulaire--centre .case { justify-content: center; text-align: center; align-items: center; }
+.newsletter .rangee-boutons { margin-top: 28px; }
+@media (max-width: 860px) { .reserver__cartes { grid-template-columns: 1fr; } .bande-avis q { font-size: 28px; } }
