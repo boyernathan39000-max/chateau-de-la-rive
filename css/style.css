@@ -648,3 +648,14 @@ body { overflow-x: clip; }
 .notes-heros { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
 .notes-heros .note-heros { margin-top: 30px; }
 @media (max-width: 560px) { .notes-heros .note-heros { margin-top: 14px; } }
+
+/* 13. Retours du 31/10/2026 ------------------------------------------------ */
+.univers-section { position: relative; overflow: hidden; }
+.univers-section__fond { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.univers-section::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.52); z-index: 1; }
+.univers-section .envelop { position: relative; z-index: 2; }
+.univers-section .tete h2, .univers-section .tete .script, .univers-section .tete .phrase { color: #fff; }
+.univers .univers__case { background: #fff; color: var(--noir); padding: clamp(26px, 3vw, 40px); text-align: left; }
+.univers .univers__case h3 { text-align: center; margin-bottom: 14px; }
+.univers .univers__case p { margin: 0; }
+.coverflow__carte--clone { pointer-events: none; cursor: default; }

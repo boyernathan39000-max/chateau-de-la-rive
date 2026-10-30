@@ -182,11 +182,18 @@
   $$('[data-coverflow]').forEach(function (c) {
     var piste = $('.coverflow__piste', c), cartes = $$('.coverflow__carte', c), parent = c.closest('[data-salles]');
     var tete = parent ? { num: $('[data-salle-num]', parent), nom: $('[data-salle-nom]', parent), sous: $('[data-salle-sous]', parent) } : null;
+    var n = cartes.length;
+    /* Anneau : une copie de la dernière carte avant la première et une copie de la première après la dernière, pour qu'on voie toujours un voisin de chaque côté */
+    var avant = cartes[n - 1].cloneNode(true), apres = cartes[0].cloneNode(true);
+    [avant, apres].forEach(function (k) { k.setAttribute('aria-hidden', 'true'); k.classList.add('coverflow__carte--clone'); });
+    piste.insertBefore(avant, cartes[0]); piste.appendChild(apres);
+    var toutes = [avant].concat(cartes, [apres]);
     var actif = -1;
     var maj = function () {
-      var r = piste.getBoundingClientRect(), centre = r.left + r.width / 2, meilleur = 0, dmin = 1e9;
-      cartes.forEach(function (k, i) {
-        var b = k.getBoundingClientRect(), dist = Math.abs((b.left + b.width / 2) - centre), d = Math.min(1, dist / (b.width * 0.9));
+      var r = piste.getBoundingClientRect(), centreP = r.left + r.width / 2, meilleur = 0, dmin = 1e9;
+      toutes.forEach(function (k, t) {
+        var i = t === 0 ? n - 1 : (t === n + 1 ? 0 : t - 1);
+        var b = k.getBoundingClientRect(), dist = Math.abs((b.left + b.width / 2) - centreP), d = Math.min(1, dist / (b.width * 0.9));
         k.style.setProperty('--s', (1 - d * 0.16).toFixed(3)); k.style.setProperty('--o', (1 - d * 0.55).toFixed(3)); k.style.setProperty('--sat', (1 - d * 0.5).toFixed(3));
         if (dist < dmin) { dmin = dist; meilleur = i; }
       });
@@ -203,19 +210,28 @@
       var b = k.getBoundingClientRect(), r = piste.getBoundingClientRect();
       return piste.scrollLeft + (b.left + b.width / 2) - (r.left + r.width / 2);
     };
+    var saute = function (i) {
+      piste.style.scrollBehavior = 'auto'; piste.style.scrollSnapType = 'none';
+      piste.scrollLeft = Math.max(0, centre(cartes[i]));
+      window.requestAnimationFrame(function () { piste.style.scrollBehavior = ''; piste.style.scrollSnapType = ''; maj(); });
+    };
     var va = function (sens) {
-      var n = cartes.length, courant = cible >= 0 ? cible : (function () { var m = 0, dmin = 1e9; cartes.forEach(function (k, i) { var d = Math.abs(centre(k) - piste.scrollLeft); if (d < dmin) { dmin = d; m = i; } }); return m; })();
-      var suivant = (courant + sens + n) % n;
+      var courant = cible >= 0 ? cible : (function () { var m = 0, dmin = 1e9; cartes.forEach(function (k, i) { var d = Math.abs(centre(k) - piste.scrollLeft); if (d < dmin) { dmin = d; m = i; } }); return m; })();
+      var suivant = courant + sens, carte = cartes[Math.max(0, Math.min(n - 1, suivant))], copie = false;
+      if (suivant >= n) { carte = apres; suivant = 0; copie = true; }
+      else if (suivant < 0) { carte = avant; suivant = n - 1; copie = true; }
       cible = suivant;
       entete(suivant);
-      piste.scrollTo({ left: Math.max(0, centre(cartes[suivant])), behavior: 'smooth' });
+      piste.scrollTo({ left: Math.max(0, centre(carte)), behavior: 'smooth' });
+      clearTimeout(va.j);
+      if (copie) va.j = setTimeout(function () { saute(suivant); }, 850);
       clearTimeout(va.t); va.t = setTimeout(function () { cible = -1; }, 1300);
     };
     $('.carrousel__fleche--prec', c).addEventListener('click', function (e) { e.stopPropagation(); va(-1); });
     $('.carrousel__fleche--suiv', c).addEventListener('click', function (e) { e.stopPropagation(); va(1); });
     piste.addEventListener('scroll', maj, { passive: true });
-    window.addEventListener('resize', maj);
-    piste.scrollLeft = 0; maj();
+    window.addEventListener('resize', function () { saute(actif < 0 ? 0 : actif); });
+    saute(0);
   });
 
   /* Formulaire de contact : les champs suivent le type d'événement --------- */
