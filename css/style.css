@@ -361,6 +361,13 @@ a.etoiles:hover { filter: brightness(1.25); }
 .avis-resume .lien { color: var(--noir); }
 .avis-resume--clair, .avis-resume--clair .lien { color: #fff; }
 .avis-tete { text-align: center; margin-bottom: 36px; }
+.avis-doubles { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 48px); max-width: 1240px; margin: 0 auto; }
+.avis-col { background: #fff; border: 1px solid rgba(176,141,87,.35); padding: clamp(28px, 3.4vw, 56px) clamp(22px, 3vw, 52px); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.avis-col .avis-resume { margin-bottom: 30px; }
+.avis-col .citations { min-height: 310px; width: 100%; }
+.avis-col .citations p { font-size: 16.5px; }
+.avis-col .citations__points { margin-top: 22px; }
+.avis-resume__reco { flex-basis: 100%; text-align: center; color: var(--or-texte); }
 .bande-note { padding: clamp(46px, 6vw, 80px) 0; text-align: center; background: var(--sable); }
 .citations blockquote .etoiles { margin-bottom: 16px; }
 
@@ -560,4 +567,8 @@ a.etoiles:hover { filter: brightness(1.25); }
   .cases .porte h2 { writing-mode: horizontal-tb; transform: none; white-space: normal; }
   .vues__arches { gap: 10px; }
   .arche figcaption { font-size: 26px; bottom: 14px; }
+}
+@media (max-width: 860px) {
+  .avis-doubles { grid-template-columns: 1fr; }
+  .avis-col .citations { min-height: 330px; }
 }
