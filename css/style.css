@@ -645,3 +645,6 @@ body { overflow-x: clip; }
 .formulaire--centre .case { justify-content: center; text-align: center; align-items: center; }
 .newsletter .rangee-boutons { margin-top: 28px; }
 @media (max-width: 860px) { .reserver__cartes { grid-template-columns: 1fr; } .bande-avis q { font-size: 28px; } }
+.notes-heros { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
+.notes-heros .note-heros { margin-top: 30px; }
+@media (max-width: 560px) { .notes-heros .note-heros { margin-top: 14px; } }
