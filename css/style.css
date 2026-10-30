@@ -213,12 +213,11 @@ sup { font-size: .6em; line-height: 0; vertical-align: super; }
 .section:not(.section--nuit) .pave-icones li:hover { background: var(--sable); }
 .pave-icones--6 { grid-template-columns: repeat(3, 1fr); }
 
-.claire 
 /* 10. Mosaïque et citations ---------------------------------------------- */
 
-.citations { position: relative; max-width: 900px; margin: 0 auto; text-align: center; min-height: 300px; }
-.citations blockquote { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; transition: opacity .9s, visibility 0s .9s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.citations blockquote.est-actif { opacity: 1; visibility: visible; transition: opacity .9s; position: relative; }
+.citations { position: relative; max-width: 900px; margin: 0 auto; text-align: center; display: grid; }
+.citations blockquote { grid-area: 1 / 1; margin: 0; opacity: 0; visibility: hidden; transition: opacity .9s, visibility 0s .9s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.citations blockquote.est-actif { opacity: 1; visibility: visible; transition: opacity .9s; }
 .citations p { font-size: 18px; line-height: 1.85; margin-bottom: 18px; }
 .citations cite { font: 600 12px/1.4 var(--f-texte); letter-spacing: .24em; text-transform: uppercase; font-style: normal; color: var(--noir); }
 .etoiles { color: var(--or); letter-spacing: 6px; font-size: 16px; display: block; margin-bottom: 18px; }
@@ -331,7 +330,6 @@ sup { font-size: .6em; line-height: 0; vertical-align: super; }
   .heros h1 { letter-spacing: .16em; }
   .heros__defile { bottom: 60px; }
   .menu-plein { padding-top: 104px; }
-  .citations { min-height: 380px; }
 }
 @media (max-width: 560px) {
         .etapes, .pave-icones, .pave-icones--6 { grid-template-columns: 1fr; }
@@ -364,7 +362,7 @@ a.etoiles:hover { filter: brightness(1.25); }
 .avis-doubles { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 48px); max-width: 1240px; margin: 0 auto; }
 .avis-col { background: #fff; border: 1px solid rgba(176,141,87,.35); padding: clamp(28px, 3.4vw, 56px) clamp(22px, 3vw, 52px); display: flex; flex-direction: column; align-items: center; text-align: center; }
 .avis-col .avis-resume { margin-bottom: 30px; }
-.avis-col .citations { min-height: 310px; width: 100%; }
+.avis-col .citations { width: 100%; }
 .avis-col .citations p { font-size: 16.5px; }
 .avis-col .citations__points { margin-top: 22px; }
 .avis-resume__reco { flex-basis: 100%; text-align: center; color: var(--or-texte); }
@@ -570,5 +568,54 @@ a.etoiles:hover { filter: brightness(1.25); }
 }
 @media (max-width: 860px) {
   .avis-doubles { grid-template-columns: 1fr; }
-  .avis-col .citations { min-height: 330px; }
 }
+
+/* 11. Modifications de l'audit du 30/10/2026 ----------------------------- */
+.portes--mariage .porte:first-child { flex: 1.7; }
+.portes--mariage:hover .porte:first-child { flex: .8; }
+.portes--mariage .porte:first-child:hover, .portes--mariage .porte:first-child:focus-visible { flex: 2.3; }
+.bloc-mariage__grille { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; }
+.bloc-mariage__photo img { width: 100%; height: clamp(340px, 42vw, 560px); object-fit: cover; display: block; }
+.bloc-mariage__texte { text-align: center; }
+.bloc-mariage__texte .rangee-boutons { justify-content: center; }
+.bloc-mariage h2 { margin-bottom: 4px; }
+.formules__liste { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.4vw, 32px); margin: 0 auto 38px; max-width: 1100px; }
+.formule { background: #fff; border: 1px solid rgba(176,141,87,.35); padding: 38px 28px 34px; text-align: center; }
+.formule__num { display: block; font: 300 44px/1 var(--f-texte); color: var(--or-texte); margin-bottom: 14px; }
+.formule h3 { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6; margin: 0; }
+.formule__note { margin: 14px 0 0; font: 600 11.5px/1.4 var(--f-texte); letter-spacing: .2em; text-transform: uppercase; color: var(--or-texte); }
+.reserver { text-align: center; }
+.brief { border: 1px dashed rgba(176,141,87,.7); padding: 28px; text-align: center; background: rgba(255,255,255,.5); }
+.brief p { margin: 0; }
+.affiches { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px, 3vw, 44px); max-width: 980px; margin: 0 auto; }
+.affiche { margin: 0; }
+.affiche img { width: 100%; height: auto; display: block; border: 1px solid rgba(176,141,87,.35); }
+.affiche figcaption { margin-top: 12px; text-align: center; font: 600 12px/1.4 var(--f-texte); letter-spacing: .2em; text-transform: uppercase; }
+.univers { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 3vw, 44px); max-width: 1100px; margin: 0 auto; }
+.univers article { text-align: center; }
+.univers h3 { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 12px; }
+.newsletter { text-align: center; }
+.newsletter .formulaire { max-width: 520px; margin: 28px auto 0; text-align: left; }
+.newsletter label { color: #fff; }
+.newsletter input[type="email"] { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.4); color: #fff; }
+.newsletter .merci { color: #fff; }
+.newsletter .enonce { color: #cfc8bb; margin-top: 34px; }
+.reseaux { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 16px; }
+.reseaux a { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--or); border-radius: 50%; color: var(--or-texte); transition: background .3s, color .3s; }
+.reseaux a:hover { background: var(--or); color: #fff; }
+.reseaux svg { width: 20px; height: 20px; }
+.reseaux--clair a { color: #fff; border-color: rgba(255,255,255,.6); }
+.reseaux--pied { justify-content: flex-start; }
+.reseaux--pied a { color: #cfc8bb; border-color: rgba(255,255,255,.3); }
+.carte-contact .reseaux { justify-content: flex-start; margin-top: 10px; }
+.menu-plein__rangee { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.menu-plein__rangee .note-heros { margin-top: 22px; }
+.note-heros--news { text-transform: uppercase; letter-spacing: .2em; font-size: 12px; font-weight: 600; }
+@media (max-width: 860px) {
+  .formules__liste, .univers, .affiches, .bloc-mariage__grille { grid-template-columns: 1fr; }
+}
+.rangee-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 2vw, 24px); margin-top: 46px; }
+.rangee-photos img { width: 100%; height: clamp(160px, 22vw, 300px); object-fit: cover; display: block; }
+@media (max-width: 860px) { .rangee-photos { grid-template-columns: 1fr; } }
+
+body { overflow-x: clip; }

@@ -255,6 +255,15 @@
     });
   }
 
+  /* Choix préremplis par l'adresse : plaquette (?evt=), contact (?sujet=, ?msg=cadeau) ------ */
+  (function () {
+    var q = new URLSearchParams(window.location.search);
+    var evt = q.get('evt'), sujet = q.get('sujet'), msg = q.get('msg');
+    if (evt) { var r = $('input[name="evt"][value="' + evt + '"]'); if (r) r.checked = true; }
+    if (sujet) { var s = $('#k-sujet'); if (s) s.value = sujet; }
+    if (msg === 'cadeau') { var m = $('#k-msg'); if (m) m.value = 'Je souhaite offrir un bon cadeau.'; }
+  })();
+
   /* Formulaires de la maquette : contrôle puis message de confirmation --- */
   $$('form[data-maquette]').forEach(function (f) {
     f.addEventListener('submit', function (e) {
