@@ -130,8 +130,8 @@ sup { font-size: .6em; line-height: 0; vertical-align: super; }
 .heros--court { min-height: 64svh; }
 .heros--court .heros__contenu { padding: 140px 0 80px; }
 .heros--court .heros__sous { font-size: clamp(30px, 3.4vw, 50px); }
-.heros--court.heros--bas { align-items: flex-end; min-height: 86svh; }
-.heros--bas .heros__contenu { padding-bottom: 80px; }
+.heros--court.heros--bas { align-items: center; min-height: 60svh; }
+.heros--bas .heros__contenu { padding: 130px 0 70px; }
 .heros--sombre { min-height: 36svh; }
 .heros--sombre::after { background: rgba(0,0,0,.2); }
 
