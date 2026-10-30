@@ -36,6 +36,10 @@
       b.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
     });
   });
+  $$('.menu-plein__ligne', menu).forEach(function (l) {
+    var b = $('.menu-plein__bascule', l), a = $('a', l);
+    if (b && a) a.addEventListener('click', function (e) { e.preventDefault(); b.click(); });
+  });
   $$('a', menu).forEach(function (a) {
     a.addEventListener('click', function () { var h = a.getAttribute('href') || ''; if (h.indexOf('#') !== -1 && h.split('#')[0] === (location.pathname.split('/').pop() || 'index.html')) basculeMenu(false); });
   });
@@ -44,9 +48,22 @@
   var apparus = $$('.apparait, .porte');
   if ('IntersectionObserver' in window) {
     var obs = new IntersectionObserver(function (entrees) {
-      entrees.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('est-visible'); obs.unobserve(e.target); } });
+      entrees.forEach(function (e) { if (e.isIntersecting || e.boundingClientRect.top < 0) { e.target.classList.add('est-visible'); obs.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -8% 0px' });
     apparus.forEach(function (el) { obs.observe(el); });
+    /* Filet de sécurité : un élément déjà dépassé (défilement rapide, retour au même endroit après un rafraîchissement) ne déclenche pas l'observateur */
+    var attente = false;
+    var rattrape = function () {
+      attente = false;
+      apparus.forEach(function (el) {
+        if (!el.classList.contains('est-visible') && el.getBoundingClientRect().top < window.innerHeight * 0.92) { el.classList.add('est-visible'); obs.unobserve(el); }
+      });
+    };
+    var planifie = function () { if (!attente) { attente = true; window.requestAnimationFrame(rattrape); } };
+    window.addEventListener('scroll', planifie, { passive: true });
+    window.addEventListener('resize', planifie);
+    window.addEventListener('load', planifie);
+    window.addEventListener('pageshow', planifie);
   } else {
     apparus.forEach(function (el) { el.classList.add('est-visible'); });
   }
@@ -58,7 +75,8 @@
     else {
       var lance = function () { if (video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); } };
       lance();
-      video.addEventListener('canplay', lance);
+      ['loadeddata', 'canplay', 'canplaythrough', 'pageshow'].forEach(function (n) { (n === 'pageshow' ? window : video).addEventListener(n, lance); });
+      setTimeout(lance, 600); setTimeout(lance, 2000);
       document.addEventListener('visibilitychange', lance);
       ['scroll', 'click', 'touchstart', 'keydown'].forEach(function (e) { window.addEventListener(e, lance, { once: true, passive: true }); });
     }

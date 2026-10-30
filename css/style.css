@@ -66,7 +66,8 @@ sup { font-size: .6em; line-height: 0; vertical-align: super; }
 
 /* 3. En-tête et menu : le logo garde la même petite taille en permanence --- */
 .entete { position: fixed; inset: 0 0 auto 0; z-index: 60; height: var(--entete); color: #fff; transition: background .4s, box-shadow .4s; }
-.entete.est-defile, .menu-ouvert .entete { background: rgba(27,27,27,.96); }
+.entete.est-defile { background: rgba(27,27,27,.96); }
+.menu-ouvert .entete { background: #0c0c0c; }
 .entete.est-defile { box-shadow: 0 6px 24px rgba(0,0,0,.18); }
 .entete__logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; }
 .entete__logo img { height: var(--logo); width: auto; filter: drop-shadow(0 2px 12px rgba(0,0,0,.35)); }
@@ -80,7 +81,7 @@ sup { font-size: .6em; line-height: 0; vertical-align: super; }
 .entete__appel { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); color: #fff; text-decoration: none; font: 600 11px/1 var(--f-texte); letter-spacing: .22em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,.55); transition: border-color .3s; }
 .entete__appel:hover { border-color: var(--or); }
 
-.menu-plein { position: fixed; inset: 0; z-index: 55; background: rgba(12,12,12,.97); color: #fff; overflow-y: auto; padding: 120px 0 60px; visibility: hidden; opacity: 0; clip-path: inset(0 100% 0 0); transition: clip-path .65s cubic-bezier(.7,0,.2,1), opacity .4s, visibility 0s .65s; }
+.menu-plein { position: fixed; inset: 0; z-index: 55; background: #0c0c0c; color: #fff; overflow-y: auto; padding: 120px 0 60px; visibility: hidden; opacity: 0; clip-path: inset(0 100% 0 0); transition: clip-path .65s cubic-bezier(.7,0,.2,1), opacity .4s, visibility 0s .65s; }
 .menu-ouvert .menu-plein { visibility: visible; opacity: 1; clip-path: inset(0 0 0 0); transition: clip-path .65s cubic-bezier(.7,0,.2,1), opacity .3s, visibility 0s; }
 .menu-ouvert { overflow: hidden; }
 .menu-plein__liste { list-style: none; margin: 0 auto 0 max(28px, 14vw); padding: 0; max-width: 640px; }
