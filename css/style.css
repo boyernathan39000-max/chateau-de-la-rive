@@ -659,3 +659,40 @@ body { overflow-x: clip; }
 .univers .univers__case h3 { text-align: center; margin-bottom: 14px; }
 .univers .univers__case p { margin: 0; }
 .coverflow__carte--clone { pointer-events: none; cursor: default; }
+
+/* catalogue du matériel de location (demande de Sylvain du 25/11/2026) */
+.catalogue__pourquoi { text-align: center; margin-bottom: clamp(36px, 5vw, 64px); }
+.catalogue__pourquoi h3 { margin-bottom: 28px; }
+.avantages-location { list-style: none; margin: 0 auto; padding: 0; max-width: 1000px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); grid-auto-flow: column; gap: 14px clamp(24px, 5vw, 64px); text-align: left; }
+.avantages-location li { position: relative; padding-left: 30px; }
+.avantages-location li::before { content: ""; position: absolute; left: 4px; top: .6em; width: 8px; height: 8px; border: 1px solid var(--or); transform: rotate(45deg); }
+.catalogue__garantie { max-width: 900px; margin: 34px auto 0; padding: 24px 30px; background: #fff; border-left: 3px solid var(--or); text-align: left; }
+.catalogue__liste { margin-bottom: 8px; grid-template-columns: minmax(0, 1fr); }
+.catalogue__rubrique { min-width: 0; }
+.catalogue__corps { padding: 4px 26px 28px; }
+.catalogue__corps p { margin: 0; padding: 0 0 14px; }
+.catalogue__corps h4 { margin: 30px 0 12px; font: 600 12px/1.4 var(--f-texte); letter-spacing: .2em; text-transform: uppercase; color: var(--or); }
+.catalogue__corps h4:first-child { margin-top: 0; }
+.tarifs-cadre { overflow-x: auto; }
+.tarifs { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.tarifs th, .tarifs td { padding: 13px 14px; border-bottom: 1px solid var(--filet); text-align: left; vertical-align: top; }
+.tarifs thead th { font: 600 11px/1.4 var(--f-texte); letter-spacing: .18em; text-transform: uppercase; color: var(--noir); border-bottom-color: var(--or); }
+.tarifs th:last-child, .tarifs .tarif { text-align: right; }
+.tarifs .tarif { white-space: nowrap; }
+.tarifs .tarif { font-weight: 600; }
+.catalogue__encadre { margin: 22px 0 6px; padding: 20px 26px; background: var(--sable); border: 1px solid var(--filet); }
+.catalogue__encadre .catalogue__titre { margin: 0; padding: 0 0 10px; font-weight: 600; }
+.catalogue__points { margin: 0; padding-left: 20px; }
+.catalogue__points li { margin: 5px 0; }
+.catalogue__corps > .catalogue__points { margin-bottom: 14px; }
+.catalogue__besoin { margin-top: clamp(40px, 5vw, 64px); text-align: center; }
+.catalogue__besoin h3 { margin-bottom: 18px; }
+.catalogue__besoin p { margin: 0 0 12px; }
+.heros__contenu > .rangee-boutons { margin-top: 28px; }
+@media (max-width: 700px) {
+  .avantages-location { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
+  .catalogue__corps { padding: 2px 16px 22px; }
+  .catalogue__garantie { padding: 20px 20px; }
+  .tarifs { font-size: 14px; }
+  .tarifs th, .tarifs td { padding: 11px 8px; }
+}
